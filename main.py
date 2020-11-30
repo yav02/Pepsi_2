@@ -73,12 +73,13 @@ def rocket_with_grar(x_0, v_0, angle, save_file=True, rho=1.184, m=35, c=0.4, g=
 
 
 def aim(dest):
-    angel1 = 1
-    angel2 = 2
+    angel1 = 10
+    angel2 = 40
     v_0 = 225
-    while abs(angel2-angel1)>0.01:
+    while abs(simulate_hit(v_0, angel2)-dest) > 5:
         temp_angel_1 = angel1
         angel1 = angel2
+        print(temp_angel_1, v_0)
         angel2 = angel2 - simulate_hit(v_0, angel2) * (angel2 - temp_angel_1) / (simulate_hit(v_0, angel2) - simulate_hit(v_0, temp_angel_1))
     return angel2
 
@@ -96,5 +97,5 @@ def min_dis(ux, uy, vx, vy):
 
 if __name__ == "__main__":
     # rocket_void(225,50)
-    #print(aim(4000))
+    print(aim(4000))
     pass
