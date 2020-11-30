@@ -22,26 +22,25 @@ def min_distance_kassam(theta):
     return math.sqrt(min_dis(kassam_x, kassam_y, kipa_x, kipa_y))
 
 
-r_oyev = rocket_with_grar(0, 225, 50, save_file=False)
-r_me = rocket_with_grar(0.75 * r_oyev[0][-1], 225, 134.77, save_file=False)
+def intersect_two_rockets():
+    r_oyev = rocket_with_grar(0, 225, 50, save_file=False)
+    r_me = rocket_with_grar(0.75 * r_oyev[0][-1], 225, 134.77, save_file=False)
+    hit_index = 0
+    for i in range(len(r_me[0])):
+        if np.abs(r_me[0][i] - r_oyev[0][i]) < 5:
+            hit_index = i
+            break
 
-index = 0
-for i in range(len(r_me[0])):
-    if np.abs(r_me[0][i] - r_oyev[0][i])<5:
-        index = i
-        break
-
-
-plt.figure()
-plt.plot(r_me[0][:index], r_me[1][:index], label="Iron Dome")
-plt.plot(r_oyev[0][:index], r_oyev[1][:index], label='Kasam')
-plt.legend()
-plt.ylim([0, 1500])
-plt.xlim([0, 4500])
-plt.xlabel("x [m]")
-plt.title("Iron Dome vs Kasam")
-plt.ylabel("Height [m]")
-plt.show()
+    plt.figure()
+    plt.plot(r_me[0][:hit_index], r_me[1][:hit_index], label="Iron Dome")
+    plt.plot(r_oyev[0][:hit_index], r_oyev[1][:hit_index], label='Kasam')
+    plt.legend()
+    plt.ylim([0, 1500])
+    plt.xlim([0, 4500])
+    plt.xlabel("x [m]")
+    plt.title("Iron Dome vs Kasam")
+    plt.ylabel("Height [m]")
+    plt.show()
 
 
 def secant(theta0, theta1):
@@ -57,5 +56,3 @@ def secant(theta0, theta1):
         print(abs(theta_nm1 - theta_n))
         if abs(theta_nm1 - theta_n) < 0.1:
             return theta_n
-
-# print(secant(30, 70))

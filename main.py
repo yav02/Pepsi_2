@@ -89,34 +89,6 @@ def convergence():
     plt.show()
 
 
-def aim(dest):
-    angel1 = 45
-    angel2 = 54
-    v_0 = 225
-    while abs(simulate_hit(v_0, angel2)-dest) > 5:
-        temp_angel_1 = angel1
-        angel1 = angel2
-        denominator = (simulate_hit(v_0, angel2) - simulate_hit(v_0, temp_angel_1))
-        print(denominator)
-        nominator = (angel2 - temp_angel_1)
-        print(nominator)
-        angel2 = angel2 - simulate_hit(v_0, angel2) * nominator / denominator
-        angel2 = divmod(angel2, 180)
-        print(angel2)
-    return angel2
-
-
-def min_dis(ux, uy, vx, vy):
-    dis_lst = []
-    for i in range(len(ux)):
-        dis_lst.append((ux[i] - vx[i]) ** 2 + (uy[i] - vy[i]) ** 2)
-    min = dis_lst[0]
-    for i in range(len(dis_lst)):
-        if dis_lst[i] <= min:
-            min = dis_lst[i]
-    return min
-
-
 if __name__ == "__main__":
     convergence()
 
