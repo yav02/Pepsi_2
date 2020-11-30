@@ -118,13 +118,5 @@ def min_dis(ux, uy, vx, vy):
 
 
 if __name__ == "__main__":
-    # rocket_void(225,50)
     convergence()
-    # pgia = []
-    # tht = np.linspace(1, 80, 90)
-    # for theta in tht:
-    #     pgia.append(2000 - simulate_hit(225, theta))
-    # plt.figure()
-    # plt.plot(tht, pgia)
-    # plt.show()
-    pass
+
