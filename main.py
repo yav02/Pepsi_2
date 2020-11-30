@@ -68,6 +68,7 @@ def rocket_with_grar(x_0, v_0, angle, save_file=True, rho=1.184, m=35, c=0.4, g=
     plt.grid()
     if save_file:
         plt.savefig(f'rocket_friction_v_0_{v_0}_angle_{angle}.pdf', dpi=200, bbox_inches='tight')
+    plt.close()
 
     return r
 
