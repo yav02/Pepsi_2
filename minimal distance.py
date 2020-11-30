@@ -44,4 +44,36 @@ def secant(theta0, theta1):
 
 
 
-# print(secant(30, 70))
+
+def secant_for_dest(theta0, theta1, v_0, dest):
+    theta_nm1 = theta0
+    theta_n = theta1
+
+    while True:
+        f_div = (simulate_hit(v_0, theta_n) - simulate_hit(v_0, theta_nm1)) / (theta_n - theta_nm1)
+        theta_np1 = theta_n - ((simulate_hit(v_0, theta_n))-dest) / f_div
+
+        theta_nm1 = theta_n
+        theta_n = theta_np1
+        print(abs(theta_nm1 - theta_n))
+        if abs(theta_nm1 - theta_n) < 0.1: return theta_n
+
+
+def visualization():
+    list_of_tetha=[]
+    list_of_distances=[]
+    for i in range(2001):
+        list_of_tetha.append(50+float(i)*0.01)
+    for j in range(2001):
+        list_of_distances.append(simulate_hit(225, 50+float(j)*0.01))
+    plt.scatter(list_of_distances, list_of_tetha)
+    plt.xlabel("distance [m]")
+    plt.ylabel("Lunching angle [deg]")
+    plt.title("Distance vs Lunching Angle")
+    plt.grid()
+    plt.show()
+
+
+
+if __name__=="__main__":
+    visualization()

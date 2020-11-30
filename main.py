@@ -50,8 +50,8 @@ def simulate_hit(v_0, angle):
     return r[0][-1]
 
 
-def rocket_with_grar(x_0, v_0, angle, save_file=True, rho=1.184, m=35, c=0.4, g=-9.81, a=math.pi * 0.001125):
-    t = np.linspace(0, 50, 2000)
+def rocket_with_grar(x_0, v_0, angle, save_file=True, rho=1.184, m=35, c=0.4, g=-9.81, a=math.pi * 0.001125, sample_num=2000):
+    t = np.linspace(0, 50, sample_num)
     start_params = [x_0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
     r = sp.odeint(df_grar, start_params, t, tfirst=True, args=(rho,m,c,g,a))
     r = np.ndarray.transpose(r)
@@ -74,14 +74,19 @@ def rocket_with_grar(x_0, v_0, angle, save_file=True, rho=1.184, m=35, c=0.4, g=
 
 
 def aim(dest):
-    angel1 = 10
-    angel2 = 40
+    angel1 = 45
+    angel2 = 54
     v_0 = 225
     while abs(simulate_hit(v_0, angel2)-dest) > 5:
         temp_angel_1 = angel1
         angel1 = angel2
-        print(temp_angel_1, v_0)
-        angel2 = angel2 - simulate_hit(v_0, angel2) * (angel2 - temp_angel_1) / (simulate_hit(v_0, angel2) - simulate_hit(v_0, temp_angel_1))
+        denominator = (simulate_hit(v_0, angel2) - simulate_hit(v_0, temp_angel_1))
+        print(denominator)
+        nominator = (angel2 - temp_angel_1)
+        print(nominator)
+        angel2 = angel2 - simulate_hit(v_0, angel2) * nominator / denominator
+        angel2 = divmod(angel2, 180)
+        print(angel2)
     return angel2
 
 
@@ -98,5 +103,12 @@ def min_dis(ux, uy, vx, vy):
 
 if __name__ == "__main__":
     # rocket_void(225,50)
-    print(aim(4000))
+    aim(2000)
+    # pgia = []
+    # tht = np.linspace(1, 80, 90)
+    # for theta in tht:
+    #     pgia.append(2000 - simulate_hit(225, theta))
+    # plt.figure()
+    # plt.plot(tht, pgia)
+    # plt.show()
     pass
