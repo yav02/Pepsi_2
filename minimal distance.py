@@ -1,3 +1,5 @@
+from main import *
+
 def min_dis(ux, uy, vx, vy):
     dis_lst = []
     for i in range(len(ux)):
@@ -9,3 +11,8 @@ def min_dis(ux, uy, vx, vy):
     return min
 
 
+def min_distance_kassam ( theta )
+    kassam_x = rocket_void(0, 225, 50, save_file=True)[0]
+    kassam_y = rocket_void(0, 225, 50, save_file=True)[1]
+    kipa_x = rocket_void(0.75 * kassam_x[-1], 225, theta, save_file=True)[0]
+    kipa_y = rocket_void(0.75 * kassam_x[-1], 225, theta, save_file=True)[1]

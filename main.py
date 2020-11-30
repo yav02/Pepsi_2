@@ -28,9 +28,9 @@ def deg_2_rad(deg):
     return deg * math.pi / 180.0
 
 
-def rocket_void(v_0, angle, save_file=True):
+def rocket_void(x_0, v_0, angle, save_file=True):
     t = np.linspace(0, 50, 1000)
-    start_params = [0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
+    start_params = [x_0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
     r = sp.odeint(df_void, start_params, t, tfirst=True)
     r = np.ndarray.transpose(r)
 
