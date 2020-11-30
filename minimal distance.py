@@ -1,6 +1,4 @@
 from main import *
-import math
-import numpy as np
 
 
 def min_dis(ux, uy, vx, vy):
