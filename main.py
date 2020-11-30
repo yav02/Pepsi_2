@@ -1,7 +1,8 @@
+import math
+
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.integrate as sp
-import math
-import matplotlib.pyplot as plt
 
 
 def df_void(t, x):
@@ -17,17 +18,17 @@ def df_grar(t, x):
     A = math.pi * 0.001125
     x, y, v_x, v_y = x
 
-    mekadem = (c*A*rho*math.sqrt(v_x**2+v_y**2))/m
-    new_v_x = -mekadem*v_x
-    new_v_y = g-mekadem*v_x
+    mekadem = (c * A * rho * math.sqrt(v_x ** 2 + v_y ** 2)) / m
+    new_v_x = -mekadem * v_x
+    new_v_y = g - mekadem * v_x
     return v_x, v_y, new_v_x, new_v_y
 
 
 def deg_2_rad(deg):
-    return deg*math.pi/180.0
+    return deg * math.pi / 180.0
 
 
-def rocket_void(v_0, angle, save_file = True):
+def rocket_void(v_0, angle, save_file=True):
     t = np.linspace(0, 50, 1000)
     start_params = [0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
     r = sp.odeint(df_void, start_params, t, tfirst=True)
@@ -49,7 +50,7 @@ def rocket_void(v_0, angle, save_file = True):
     return r
 
 
-def rocket_with_grar(v_0, angle, save_file = True):
+def rocket_with_grar(v_0, angle, save_file=True):
     t = np.linspace(0, 50, 1000)
     start_params = [0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
     r = sp.odeint(df_grar, start_params, t, tfirst=True)
@@ -72,5 +73,5 @@ def rocket_with_grar(v_0, angle, save_file = True):
 
 
 if __name__ == "__main__":
-    #rocket_void(225,50)
+    # rocket_void(225,50)
     rocket_with_grar(225, 50)
