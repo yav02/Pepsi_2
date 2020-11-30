@@ -73,6 +73,22 @@ def rocket_with_grar(x_0, v_0, angle, save_file=True, rho=1.184, m=35, c=0.4, g=
     return r
 
 
+def convergence():
+    samples = np.logspace(2, 5, 100)
+    results = [[],[]]
+    for i in samples:
+        results[0].append(rocket_with_grar(0, 225, 50, save_file=False, sample_num=int(i))[0][-1])
+        results[1].append((50/i))
+    plt.figure()
+    plt.plot(results[1],results[0])
+    plt.xlabel("dt [s]")
+    plt.ylabel("distance [m]")
+    plt.xscale("log")
+    plt.title("Convergence Test For The Algorithm")
+    plt.grid()
+    plt.show()
+
+
 def aim(dest):
     angel1 = 45
     angel2 = 54
@@ -103,7 +119,7 @@ def min_dis(ux, uy, vx, vy):
 
 if __name__ == "__main__":
     # rocket_void(225,50)
-    aim(2000)
+    convergence()
     # pgia = []
     # tht = np.linspace(1, 80, 90)
     # for theta in tht:
