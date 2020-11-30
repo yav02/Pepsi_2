@@ -27,7 +27,7 @@ def deg_2_rad(deg):
     return deg*math.pi/180.0
 
 
-def rocket_void(v_0, angle):
+def rocket_void(v_0, angle, save_file = True):
     t = np.linspace(0, 50, 1000)
     start_params = [0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
     r = sp.odeint(df_void, start_params, t, tfirst=True)
@@ -39,16 +39,17 @@ def rocket_void(v_0, angle):
 
     plt.figure()
     plt.plot(r[0], r[1])
-    plt.title("Rocket Location");
-    plt.xlabel('x [m]');
-    plt.ylabel('y [m]');
-    plt.savefig(f'rocket_void_v_0_{v_0}_angle_{angle}.pdf', dpi=200, bbox_inches='tight')
+    plt.title("Rocket Location")
+    plt.xlabel('x [m]')
+    plt.ylabel('y [m]')
     plt.grid()
+    if save_file:
+        plt.savefig(f'rocket_void_v_0_{v_0}_angle_{angle}.pdf', dpi=200, bbox_inches='tight')
 
     return r
 
 
-def rocket_with_grar(v_0, angle):
+def rocket_with_grar(v_0, angle, save_file = True):
     t = np.linspace(0, 50, 1000)
     start_params = [0, 0, v_0 * math.cos(deg_2_rad(angle)), v_0 * math.sin(deg_2_rad(angle))]
     r = sp.odeint(df_grar, start_params, t, tfirst=True)
@@ -61,13 +62,15 @@ def rocket_with_grar(v_0, angle):
     plt.figure()
     plt.plot(r[0], r[1])
     plt.title("Rocket Location (with friction)");
-    plt.xlabel('x [m]');
-    plt.ylabel('y [m]');
-    plt.show()
+    plt.xlabel('x [m]')
+    plt.ylabel('y [m]')
+    plt.grid()
+    if save_file:
+        plt.savefig(f'rocket_friction_v_0_{v_0}_angle_{angle}.pdf', dpi=200, bbox_inches='tight')
 
     return r
 
 
 if __name__ == "__main__":
-    rocket_void(225,50)
-    #rocket_with_grar(225, 50)
+    #rocket_void(225,50)
+    rocket_with_grar(225, 50)
